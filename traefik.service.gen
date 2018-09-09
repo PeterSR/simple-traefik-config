@@ -1,0 +1,12 @@
+[Unit]
+Description=Traefik
+
+[Service]
+Type=notify
+WorkingDirectory=REPLACE-WITH-PWD
+ExecStart=REPLACE-WITH-PWD/traefik --configFile=traefik.toml
+Restart=always
+WatchdogSec=1s
+
+[Install]
+WantedBy=multi-user.target

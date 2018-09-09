@@ -1,0 +1,12 @@
+[frontends]
+  [frontends.forum]
+    backend = "forum"
+    passHostHeader = true
+    [frontends.forum.routes.route0]
+      rule = "Host:forum.example.com"
+
+[backends]
+  [backends.forum]
+    [backends.forum.servers.server0]
+      url = "http://localhost:8001"
+

@@ -1,0 +1,12 @@
+[frontends]
+  [frontends.web]
+    backend = "web"
+    passHostHeader = true
+    [frontends.web.routes.route0]
+      rule = "Host:example.com,www.example.com"
+
+[backends]
+  [backends.web]
+    [backends.web.servers.server0]
+      url = "http://localhost:8000"
+

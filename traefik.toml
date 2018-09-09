@@ -1,0 +1,51 @@
+#debug = true
+#logLevel = "DEBUG" # "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "PANIC"
+
+
+# Entrypoints
+defaultEntryPoints = ["http", "https"]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
+
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.tls]
+
+  [entryPoints.dashboard]
+    address = ":8080"
+    [entryPoints.dashboard.auth]
+    [entryPoints.dashboard.auth.basic]
+    # User "user" with password "pass" using Bcrypt.
+    # Generate something else with a htpasswd generator.
+    users = [
+        "user:$2y$11$vzBWACTQnV188BnHoFuHneytgIG25lkmTPHMi.49xMa2WvPnhwZfq"
+    ]
+
+
+# SSL
+[acme]
+  email = "example@example.com"
+  storage = "acme.json"
+  onHostRule = true
+  entryPoint = "https"
+  [acme.httpChallenge]
+    entryPoint = "http"
+
+[[acme.domains]]
+  main = "example.com"
+  sans = ["www.example.com", "forum.example.com"]
+
+
+# Dashboard
+[api]
+  entrypoint = "dashboard"
+
+
+# Frontend and backend configs
+[file]
+  directory = "config"
+  watch = true
